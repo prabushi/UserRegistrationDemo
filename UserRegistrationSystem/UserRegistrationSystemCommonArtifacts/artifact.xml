@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="UserRegistration_Fault_Sequence" groupId="org.wso2.demo.user-registration.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/UserRegistration_Fault_Sequence.xml</file>
+    </artifact>
+    <artifact name="backend" groupId="org.wso2.demo.user-registration.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/backend.xml</file>
+    </artifact>
+    <artifact name="UserRegistration_Registration_API" groupId="org.wso2.demo.user-registration.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/UserRegistration_Registration_API.xml</file>
+    </artifact>
+</artifacts>

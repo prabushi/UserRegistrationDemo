@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="UserRegistration_Fault_Sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom">
+        <property name="text" value="An unexpected error occurred"/>
+        <property expression="$ctx:ERROR_MESSAGE" name="message"/>
+        <property expression="$ctx:ERROR_CODE" name="code"/>
+        <property expression="$ctx:ERROR_DETAIL" name="detail"/>
+        <property expression="$ctx:ERROR_EXCEPTION" name="exception"/>
+    </log>
+    <drop/>
+</sequence>

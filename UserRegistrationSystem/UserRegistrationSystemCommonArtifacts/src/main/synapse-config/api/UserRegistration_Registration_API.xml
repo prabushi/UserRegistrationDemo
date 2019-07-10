@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/user-registration" name="UserRegistration_Registration_API" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST GET" uri-template="/register">
+        <inSequence>
+            <log level="full">
+                <property name="Message" value="Placing a new order !!"/>
+            </log>
+            <foreach expression="//userroles" id="foreach">
+                <sequence>
+                    <log/>
+                    <payloadFactory media-type="xml">
+                        <format>
+                            <user_roles>$1</user_roles>
+                        </format>
+                        <args>
+                            <arg evaluator="xml" expression="//role"/>
+                        </args>
+                    </payloadFactory>
+                </sequence>
+            </foreach>
+            <clone>
+                <target>
+                    <sequence>
+                        <call>
+                            <endpoint key="gov:endpoints/UserRegistration_Backend_Endpoint.xml"/>
+                        </call>
+                    </sequence>
+                </target>
+                <target>
+                    <sequence>
+                        <property expression="$body" name="messageBody" scope="default" type="STRING"/>
+                        <gmail.init>
+                            <userId>prabushinirmala@gmail.com</userId>
+                            <accessToken>{wso2:vault-lookup('ACCESS_TOKEN')}</accessToken>
+                            <apiUrl>https://www.googleapis.com/gmail</apiUrl>
+                            <clientId>{wso2:vault-lookup('CLIENT_ID')}</clientId>
+                            <clientSecret>{wso2:vault-lookup('CLIENT_SECRET')}</clientSecret>
+                            <refreshToken>{wso2:vault-lookup('REFRESH_TOKEN')}</refreshToken>
+                        </gmail.init>
+                        <gmail.sendMail>
+                            <to>prabushis@wso2.com</to>
+                            <subject>Register an user</subject>
+                            <from>prabushinirmala@gmail.com</from>
+                            <messageBody>{$ctx:messageBody}</messageBody>
+                        </gmail.sendMail>
+                        <drop/>
+                    </sequence>
+                </target>
+                <target>
+                    <sequence>
+                        <property name="USERID" scope="default" type="STRING" value="1"/>
+                        <dbreport>
+                            <connection>
+                                <pool>
+                                    <driver>com.mysql.jdbc.Driver</driver>
+                                    <url>jdbc:mysql://localhost:3306/USER_REGISTRATION_DB</url>
+                                    <user>root</user>
+                                    <password>{wso2:vault-lookup('MYSQL_SQL')}</password>
+                                </pool>
+                            </connection>
+                            <statement>
+                                <sql><![CDATA[insert into UserInfo (userId, name, email, city, phone) values (?, ?, ?, ?, ?);]]></sql>
+                                <parameter expression="get-property('USERID')" type="INTEGER"/>
+                                <parameter expression="//name" type="CHAR"/>
+                                <parameter expression="//email" type="CHAR"/>
+                                <parameter expression="//city" type="CHAR"/>
+                                <parameter expression="//phone" type="CHAR"/>
+                            </statement>
+                        </dbreport>
+                        <drop/>
+                    </sequence>
+                </target>
+            </clone>
+            <loopback/>
+        </inSequence>
+        <outSequence>
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            <respond/>
+        </outSequence>
+        <faultSequence/>
+    </resource>
+</api>
