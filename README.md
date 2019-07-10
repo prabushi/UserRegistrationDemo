@@ -9,5 +9,6 @@ curl -X POST \
 	"email":"bob@wso2.com",
 	"city":"Colombo",
 	"phone": "+94123456",
+	"id":"1",
 	"userroles" :  [{"role" : "admin"}, {"role": "devop"}]
 }'
