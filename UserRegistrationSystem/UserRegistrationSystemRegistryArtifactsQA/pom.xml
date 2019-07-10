@@ -3,14 +3,14 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.wso2.demo</groupId>
-  <artifactId>common.esb-artifacts</artifactId>
+  <artifactId>qa.registry</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>common.esb-artifacts</name>
-  <description>common.esb-artifacts</description>
+  <name>qa.registry</name>
+  <description>qa.registry</description>
   <properties>
     <maven.test.skip>false</maven.test.skip>
-    <CApp.type>bpel/workflow=zip,lib/registry/filter=jar,webapp/jaxws=war,lib/library/bundle=jar,service/dataservice=dbs,synapse/local-entry=xml,synapse/proxy-service=xml,carbon/application=car,registry/resource=zip,lib/dataservice/validator=jar,synapse/endpoint=xml,web/application=war,lib/carbon/ui=jar,service/axis2=aar,synapse/sequence=xml,synapse/configuration=xml,wso2/gadget=dar,lib/registry/handlers=jar,lib/synapse/mediator=jar,synapse/task=xml,synapse/api=xml,synapse/template=xml,synapse/message-store=xml,synapse/message-processors=xml,synapse/inbound-endpoint=xml</CApp.type>
+    <CApp.type>bpel/workflow=zip,lib/registry/filter=jar,webapp/jaxws=war,lib/library/bundle=jar,service/dataservice=dbs,synapse/local-entry=xml,synapse/proxy-service=xml,carbon/application=car,registry/resource=zip,lib/dataservice/validator=jar,synapse/endpoint=xml,web/application=war,lib/carbon/ui=jar,service/axis2=aar,synapse/sequence=xml,event/stream=json,event/publisher=xml,event/receiver=xml,event/execution-plan=siddhiql,synapse/configuration=xml,wso2/gadget=dar,lib/registry/handlers=jar,lib/synapse/mediator=jar</CApp.type>
   </properties>
   <repositories>
     <repository>
@@ -43,22 +43,6 @@
         <version>1.4.0</version>
         <extensions>true</extensions>
         <executions>
-          <execution>
-            <id>package</id>
-            <phase>package</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <configuration>
-              <executable>mvn</executable>
-              <workingDirectory>${project.build.directory}</workingDirectory>
-              <arguments>
-                <argument>clean</argument>
-                <argument>package</argument>
-                <argument>-Dmaven.test.skip=${maven.test.skip}</argument>
-              </arguments>
-            </configuration>
-          </execution>
           <execution>
             <id>install</id>
             <phase>install</phase>
@@ -97,64 +81,23 @@
         <artifactId>maven-eclipse-plugin</artifactId>
         <version>2.9</version>
         <configuration>
-          <buildcommands />
+          <buildcommands>
+            <buildcommand>org.eclipse.jdt.core.javabuilder</buildcommand>
+          </buildcommands>
           <projectnatures>
-            <projectnature>org.wso2.developerstudio.eclipse.esb.project.nature</projectnature>
+            <projectnature>org.wso2.developerstudio.eclipse.general.project.nature</projectnature>
+            <projectnature>org.eclipse.jdt.core.javanature</projectnature>
           </projectnatures>
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.wso2</groupId>
-        <artifactId>synapse-unit-test-maven-plugin</artifactId>
-        <version>1.0-SNAPSHOT</version>
-        <executions>
-          <execution>
-            <id>synapse-unit-test</id>
-            <phase>test</phase>
-            <goals>
-              <goal>SynapseUnitTest</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <synapseServer>
-            <host>127.0.0.1</host>
-            <unitTestPort>9008</unitTestPort>
-            <localServer>
-              <executionScript>/home/prabushi/Documents/Demo/IntegrationStudio/runtime/microesb/bin/micro-integrator.bat</executionScript>
-            </localServer>
-          </synapseServer>
-          <testCasesFilePath>${project.basedir}/test</testCasesFilePath>
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.wso2.maven</groupId>
-        <artifactId>wso2-esb-sequence-plugin</artifactId>
-        <version>2.1.0</version>
+        <artifactId>wso2-general-project-plugin</artifactId>
+        <version>2.1.1</version>
         <extensions>true</extensions>
         <executions>
           <execution>
-            <id>sequence</id>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>pom-gen</goal>
-            </goals>
-            <configuration>
-              <artifactLocation>.</artifactLocation>
-              <typeList>${artifact.types}</typeList>
-            </configuration>
-          </execution>
-        </executions>
-        <configuration />
-      </plugin>
-      <plugin>
-        <groupId>org.wso2.maven</groupId>
-        <artifactId>wso2-esb-api-plugin</artifactId>
-        <version>2.1.0</version>
-        <extensions>true</extensions>
-        <executions>
-          <execution>
-            <id>api</id>
+            <id>registry</id>
             <phase>process-resources</phase>
             <goals>
               <goal>pom-gen</goal>

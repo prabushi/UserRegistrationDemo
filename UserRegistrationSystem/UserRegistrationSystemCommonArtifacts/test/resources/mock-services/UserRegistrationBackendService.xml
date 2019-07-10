@@ -1,0 +1,24 @@
+<mock-service>
+    <service-name>http://localhost</service-name>
+    <port>8280</port>
+    <context>/process-registration</context>
+    <resources>
+        <resource>
+            <sub-context>/test</sub-context>
+            <method>POST</method>
+            <request>
+                <payload>{"name":"Bob", "email":"bob@wso2.com", "city":"Colombo", "phone": "+94123456", "id":"1", "userroles" :  {"role" : "admin"}, {"role": "devop"}]}</payload>
+                <headers>
+                    <header name="Content-Type" value="application/json"/>
+                </headers>
+            </request>
+            <response>
+                <status-code>200</status-code>
+                <payload>{"Message" : "Successfully registered the user Bob !!", "Status" : "200 OK"}</payload>
+                <headers>
+                    <header name="Content-Type" value="application/json"/>
+                </headers>
+            </response>
+        </resource>
+    </resources>
+</mock-service>

@@ -3,48 +3,21 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.wso2.demo</groupId>
-  <artifactId>common.composite</artifactId>
+  <artifactId>qa.composite</artifactId>
   <version>1.0.0</version>
   <packaging>carbon/application</packaging>
-  <name>common.composite</name>
-  <description>common.composite</description>
+  <name>qa.composite</name>
+  <description>qa.composite</description>
   <properties>
-    <org.wso2.demo.sequence_._UserRegistration_Mail_Sequence>capp/EnterpriseServiceBus</org.wso2.demo.sequence_._UserRegistration_Mail_Sequence>
-    <org.wso2.demo.sequence_._UserRegistration_Fault_Sequence>capp/EnterpriseServiceBus</org.wso2.demo.sequence_._UserRegistration_Fault_Sequence>
-    <org.wso2.demo.lib_._gmail-connector>capp/EnterpriseServiceBus</org.wso2.demo.lib_._gmail-connector>
-    <org.wso2.demo.encryptortemClassMediatorProject_._encryptor.class>capp/EnterpriseServiceBus</org.wso2.demo.encryptortemClassMediatorProject_._encryptor.class>
-    <org.wso2.demo.api_._UserRegistration_Processing_API>capp/EnterpriseServiceBus</org.wso2.demo.api_._UserRegistration_Processing_API>
     <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,datasource/datasource=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
+    <org.wso2.demo.resource_._UserRegistration_Backend_Endpoint>capp/EnterpriseIntegrator</org.wso2.demo.resource_._UserRegistration_Backend_Endpoint>
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.wso2.demo.lib</groupId>
-      <artifactId>gmail-connector</artifactId>
-      <version>3.0.8</version>
+      <groupId>org.wso2.demo.resource</groupId>
+      <artifactId>UserRegistration_Backend_Endpoint</artifactId>
+      <version>1.0.0</version>
       <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>org.wso2.demo.api</groupId>
-      <artifactId>UserRegistration_Processing_API</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>org.wso2.demo.sequence</groupId>
-      <artifactId>UserRegistration_Fault_Sequence</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>org.wso2.demo.sequence</groupId>
-      <artifactId>UserRegistration_Mail_Sequence</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>org.wso2.demo.encryptortemClassMediatorProject</groupId>
-      <artifactId>encryptor.class</artifactId>
-      <version>1.0.0</version>
     </dependency>
   </dependencies>
   <repositories>

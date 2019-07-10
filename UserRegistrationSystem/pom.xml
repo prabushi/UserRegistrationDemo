@@ -10,11 +10,12 @@
   <description>UserRegistrationSystem</description>
   <modules>
     <module>UserRegistrationSystemCommonArtifacts</module>
-    <module>UserRegistrationSystemConnectorArtifacts</module>
-    <module>RegistryArtifactsQA</module>
-    <module>RegistryArtifactsProduction</module>
-    <module>ProdCompositeProject</module>
-    <module>QACompositeProject</module>
+    <module>UserRegistrationSystemRegistryArtifactsQA</module>
+    <module>UserRegistrationSystemRegistryArtifactsProd</module>
+    <module>UserRegistrationConnectorProject</module>
+    <module>UserRegistrationSystemClassMediatorProject</module>
+    <module>UserRegistrationSystemCompositeProjectProd</module>
+    <module>UserRegistrationSystemCompositeProjectQA</module>
     <module>UserRegistrationSystemCommonCompositeProject</module>
   </modules>
   <build>

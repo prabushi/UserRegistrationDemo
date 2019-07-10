@@ -3,14 +3,14 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.wso2.demo</groupId>
-  <artifactId>common.esb-artifacts</artifactId>
+  <artifactId>common.connector</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>common.esb-artifacts</name>
-  <description>common.esb-artifacts</description>
+  <name>common.connector</name>
+  <description>common.connector</description>
   <properties>
+    <CApp.type>synapse/lib</CApp.type>
     <maven.test.skip>false</maven.test.skip>
-    <CApp.type>bpel/workflow=zip,lib/registry/filter=jar,webapp/jaxws=war,lib/library/bundle=jar,service/dataservice=dbs,synapse/local-entry=xml,synapse/proxy-service=xml,carbon/application=car,registry/resource=zip,lib/dataservice/validator=jar,synapse/endpoint=xml,web/application=war,lib/carbon/ui=jar,service/axis2=aar,synapse/sequence=xml,synapse/configuration=xml,wso2/gadget=dar,lib/registry/handlers=jar,lib/synapse/mediator=jar,synapse/task=xml,synapse/api=xml,synapse/template=xml,synapse/message-store=xml,synapse/message-processors=xml,synapse/inbound-endpoint=xml</CApp.type>
   </properties>
   <repositories>
     <repository>
@@ -37,6 +37,26 @@
   <build>
     <directory>target/capp</directory>
     <plugins>
+      <plugin>
+        <groupId>org.wso2.maven</groupId>
+        <artifactId>wso2-esb-connector-plugin</artifactId>
+        <version>1.0.0</version>
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <id>connector</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>pom-gen</goal>
+            </goals>
+            <configuration>
+              <artifactLocation>.</artifactLocation>
+              <typeList>${artifact.types}</typeList>
+            </configuration>
+          </execution>
+        </executions>
+        <configuration />
+      </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
@@ -99,73 +119,9 @@
         <configuration>
           <buildcommands />
           <projectnatures>
-            <projectnature>org.wso2.developerstudio.eclipse.esb.project.nature</projectnature>
+            <projectnature>org.wso2.developerstudio.eclipse.artifact.connector.project.nature</projectnature>
           </projectnatures>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.wso2</groupId>
-        <artifactId>synapse-unit-test-maven-plugin</artifactId>
-        <version>1.0-SNAPSHOT</version>
-        <executions>
-          <execution>
-            <id>synapse-unit-test</id>
-            <phase>test</phase>
-            <goals>
-              <goal>SynapseUnitTest</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <synapseServer>
-            <host>127.0.0.1</host>
-            <unitTestPort>9008</unitTestPort>
-            <localServer>
-              <executionScript>/home/prabushi/Documents/Demo/IntegrationStudio/runtime/microesb/bin/micro-integrator.bat</executionScript>
-            </localServer>
-          </synapseServer>
-          <testCasesFilePath>${project.basedir}/test</testCasesFilePath>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.wso2.maven</groupId>
-        <artifactId>wso2-esb-sequence-plugin</artifactId>
-        <version>2.1.0</version>
-        <extensions>true</extensions>
-        <executions>
-          <execution>
-            <id>sequence</id>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>pom-gen</goal>
-            </goals>
-            <configuration>
-              <artifactLocation>.</artifactLocation>
-              <typeList>${artifact.types}</typeList>
-            </configuration>
-          </execution>
-        </executions>
-        <configuration />
-      </plugin>
-      <plugin>
-        <groupId>org.wso2.maven</groupId>
-        <artifactId>wso2-esb-api-plugin</artifactId>
-        <version>2.1.0</version>
-        <extensions>true</extensions>
-        <executions>
-          <execution>
-            <id>api</id>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>pom-gen</goal>
-            </goals>
-            <configuration>
-              <artifactLocation>.</artifactLocation>
-              <typeList>${artifact.types}</typeList>
-            </configuration>
-          </execution>
-        </executions>
-        <configuration />
       </plugin>
     </plugins>
   </build>

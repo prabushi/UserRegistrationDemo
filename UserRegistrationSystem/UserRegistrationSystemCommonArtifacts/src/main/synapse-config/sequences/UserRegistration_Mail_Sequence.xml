@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="UserRegistration_Mail_Sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property expression="$body" name="messageBody" scope="default" type="STRING"/>
+    <gmail.init>
+        <userId>{wso2:vault-lookup('USER_ID')}</userId>
+        <accessToken>{wso2:vault-lookup('ACCESS_TOKEN')}</accessToken>
+        <apiUrl>https://www.googleapis.com/gmail</apiUrl>
+        <clientId>{wso2:vault-lookup('CLIENT_ID')}</clientId>
+        <clientSecret>{wso2:vault-lookup('CLIENT_SECRET')}</clientSecret>
+        <refreshToken>{wso2:vault-lookup('REFRESH_TOKEN')}</refreshToken>
+    </gmail.init>
+    <gmail.sendMail>
+        <to>prabushis@wso2.com</to>
+        <subject>Register an user</subject>
+        <from>{wso2:vault-lookup('USER_ID')}</from>
+        <messageBody>{$ctx:messageBody}</messageBody>
+    </gmail.sendMail>
+    <drop/>
+</sequence>

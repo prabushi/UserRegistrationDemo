@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/user-registration" name="UserRegistration_Processing_API" xmlns="http://ws.apache.org/ns/synapse">
+    <resource faultSequence="UserRegistration_Fault_Sequence" methods="GET">
+        <inSequence>
+            <foreach expression="//userroles" id="foreach-role">
+                <sequence>
+                    <payloadFactory description="Converts the roles array" media-type="xml">
+                        <format>
+                            <user_roles xmlns="">$1</user_roles>
+                        </format>
+                        <args>
+                            <arg evaluator="xml" expression="//role"/>
+                        </args>
+                    </payloadFactory>
+                </sequence>
+            </foreach>
+            <clone>
+                <target>
+                    <sequence>
+                        <call>
+                            <endpoint key="gov:endpoints/UserRegistration_Backend_Endpoint.xml"/>
+                        </call>
+                    </sequence>
+                </target>
+                <target>
+                    <sequence>
+                        <sequence key="UserRegistration_Mail_Sequence"/>
+                    </sequence>
+                </target>
+                <target>
+                    <sequence>
+                        <dbreport>
+                            <connection>
+                                <pool>
+                                    <driver>com.mysql.jdbc.Driver</driver>
+                                    <url>jdbc:mysql://localhost:3306/USER_REGISTRATION_DB</url>
+                                    <user>root</user>
+                                    <password>{wso2:valut-lookup('MYSQL_PASSWORD')}</password>
+                                </pool>
+                            </connection>
+                            <statement>
+                                <sql><![CDATA[insert into UserInfo (userId, name, email, city, phone) values (?, ?, ?, ?, ?);]]></sql>
+                                <parameter expression="//id" type="INTEGER"/>
+                                <parameter expression="//name" type="CHAR"/>
+                                <parameter expression="//email" type="CHAR"/>
+                                <parameter expression="//city" type="CHAR"/>
+                                <parameter expression="//phone" type="CHAR"/>
+                            </statement>
+                        </dbreport>
+                        <drop/>
+                    </sequence>
+                </target>
+            </clone>
+            <loopback description="Sends message flow to the outsequence"/>
+        </inSequence>
+        <outSequence>
+            <class description="Encrypts the output data" name="org.wso2.demo.encryptor.UserRegistrationEncryptorMediator"/>
+            <respond description="Responds back to the client"/>
+        </outSequence>
+    </resource>
+</api>

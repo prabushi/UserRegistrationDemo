@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.wso2.demo</groupId>
+  <artifactId>common.esb-artifacts_module</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>common.esb-artifacts_module</name>
+  <description>common.esb-artifacts_module</description>
+  <modules>
+    <module>artifacts/sequence/UserRegistration_Fault_Sequence</module>
+    <module>artifacts/sequence/UserRegistration_Mail_Sequence</module>
+    <module>artifacts/api/UserRegistration_Processing_API</module>
+  </modules>
+</project>

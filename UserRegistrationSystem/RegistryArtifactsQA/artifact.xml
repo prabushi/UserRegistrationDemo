@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><artifacts>
-    <artifact name="UserRegistrationBackendEndpoint" groupId="org.wso2.demo.user-registration.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
-        <item>
-            <file>UserRegistration_Backend_Endpoint.xml</file>
-            <path>/_system/governance/endpoints</path>
-            <mediaType>application/vnd.wso2.esb.endpoint</mediaType>
-        </item>
-    </artifact>
-</artifacts>

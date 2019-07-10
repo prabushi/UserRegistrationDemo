@@ -1,0 +1,14 @@
+<synapse-unit-test>
+    <artifacts>
+        <test-artifact>
+            <artifact>/UserRegistrationSystemCommonArtifacts/src/main/synapse-config/api/UserRegistration_Processing_API.xml</artifact>
+        </test-artifact>
+        <supportive-artifacts>
+            <artifact>/UserRegistrationSystemCommonArtifacts/src/main/synapse-config/sequences/UserRegistration_Fault_Sequence.xml</artifact>
+            <artifact>/UserRegistrationSystemCommonArtifacts/src/main/synapse-config/sequences/UserRegistration_Mail_Sequence.xml</artifact>
+        </supportive-artifacts>
+    </artifacts>
+    <mock-services>
+        <mock-service>/UserRegistrationSystemCommonArtifacts/test/resources/mock-services/UserRegistrationBackendService.xml</mock-service>
+    </mock-services>
+</synapse-unit-test>
